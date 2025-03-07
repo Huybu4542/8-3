@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chúc Mừng 8/3</title>
+    <style>
+        body {
+            background-color: #ffdde1;
+            text-align: center;
+            font-family: Arial, sans-serif;
+            overflow: hidden;
+            position: relative;
+            height: 100vh;
+        }
+        .message {
+            font-size: 24px;
+            font-weight: bold;
+            opacity: 0;
+            transform: translateY(-20px);
+            transition: opacity 1s, transform 1s;
+        }
+        .container {
+            position: relative;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            z-index: 1;
+        }
+        .falling {
+            position: fixed;
+            font-size: 24px;
+            opacity: 0.8;
+            animation: fall 5s linear infinite, blink 1s infinite alternate;
+        }
+        .flower-img {
+            position: fixed;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%) rotate(0deg);
+            width: 250px;
+            height: auto;
+            z-index: 2;
+            animation: shake 2s infinite alternate ease-in-out;
+        }
+        @keyframes fall {
+            0% { transform: translateY(-100px) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
+        }
+        @keyframes blink {
+            0% { opacity: 0.5; }
+            100% { opacity: 1; }
+        }
+        @keyframes shake {
+            0% { transform: translateX(-50%) rotate(-5deg); }
+            100% { transform: translateX(-50%) rotate(5deg); }
+        }
+    </style>
+</head>
+<body>
+    <img src="https://png.pngtree.com/png-clipart/20210418/original/pngtree-red-heart-icon-png-image_6234125.png" alt="Trái tim lắc lư" class="flower-img">
+    <div class="container" id="container"></div>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const messages = [
+                "Chúc mừng 8/3, cô gái đặc biệt 💖",
+                "Chúc bạn luôn xinh đẹp, vui vẻ và hạnh phúc! 🌸",
+                "Mong rằng mỗi ngày đều tràn ngập niềm vui! ✨",
+                "Chúc bạn luôn mạnh mẽ và đạt được mọi ước mơ! 💪",
+                "Mỗi ngày đều là ngày tuyệt vời với bạn! 🌞",
+                "Bạn là người tuyệt vời nhất mà tớ biết! 💕",
+                "Chúc bạn luôn cười thật nhiều và tràn đầy năng lượng! 😄",
+                "Mong rằng những điều tốt đẹp nhất luôn đến với bạn! 🌷",
+                "Có thể hôm nay bạn thấy buồn, nhưng thời gian sẽ giúp bạn mạnh mẽ hơn! 💙",
+                "Mọi thứ rồi sẽ ổn thôi, bạn xứng đáng với những điều tốt đẹp hơn! 🌿",
+                "Đừng buồn mãi nhé! Cánh cửa này đóng lại thì cánh cửa khác sẽ mở ra! 🚪",
+                "Bạn không đơn độc, vẫn có những người yêu thương và quan tâm đến bạn! 💖",
+                "Mạnh mẽ lên nào! Một ngày nào đó bạn sẽ cười vì hôm nay đã vượt qua được! 😊",
+                "Đôi khi chia tay là cơ hội để tìm thấy một hạnh phúc mới tốt hơn! 🌈"
+            ];
+            let index = 0;
+            const container = document.getElementById("container");
+
+            function showMessages() {
+                container.innerHTML = "";
+                for (let i = 0; i < 3; i++) {
+                    if (index >= messages.length) index = 0;
+                    let msg = document.createElement("div");
+                    msg.className = "message";
+                    msg.textContent = messages[index++];
+                    container.appendChild(msg);
+                    setTimeout(() => {
+                        msg.style.opacity = 1;
+                        msg.style.transform = "translateY(0)";
+                    }, i * 1000);
+                }
+            }
+            showMessages();
+            setInterval(showMessages, 5000);
+
+            function createFallingSymbol(symbol) {
+                let elem = document.createElement("div");
+                elem.innerHTML = symbol;
+                elem.className = "falling";
+                elem.style.left = Math.random() * 100 + "vw";
+                elem.style.top = Math.random() * -100 + "px";
+                elem.style.fontSize = (20 + Math.random() * 20) + "px";
+                elem.style.animationDuration = (3 + Math.random() * 3) + "s";
+                document.body.appendChild(elem);
+                setTimeout(() => elem.remove(), 5000);
+            }
+            setInterval(() => {
+                createFallingSymbol("❤️");
+                createFallingSymbol("🌸");
+            }, 200);
+        });
+    </script>
+</body>
+</html>
